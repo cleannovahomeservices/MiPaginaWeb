@@ -1,0 +1,156 @@
+Información sobre Ami Cranz
+
+Nombre: Ami Cranz
+Rol: Fundador y Desarrollador Digital
+
+Soy un desarrollador digital especializado en crear soluciones tecnológicas modernas para negocios y proyectos digitales. Trabajo combinando diseño web, automatización, inteligencia artificial y desarrollo de sistemas digitales para construir herramientas útiles, escalables y eficientes.
+
+Mi enfoque no es solo crear páginas web bonitas, sino desarrollar productos digitales que realmente funcionen y ayuden a las empresas a crecer. Combino diseño moderno con tecnología avanzada para construir sistemas que automatizan procesos, mejoran la experiencia del usuario y optimizan el rendimiento digital.
+
+Trabajo principalmente desarrollando:
+
+páginas web modernas
+
+chatbots con inteligencia artificial
+
+automatizaciones de procesos
+
+integraciones entre sistemas
+
+aplicaciones web personalizadas
+
+También implemento soluciones basadas en inteligencia artificial que permiten a los negocios automatizar tareas repetitivas, mejorar la atención al cliente y gestionar información de forma más eficiente.
+
+Mi objetivo es construir la infraestructura digital que permita a los negocios escalar sin fricciones tecnológicas.
+
+Servicios principales
+Desarrollo de páginas web
+
+Creación de páginas web modernas, rápidas y optimizadas para conversión. Desarrollo sitios web para negocios, proyectos personales y plataformas digitales con diseño profesional y experiencia de usuario optimizada.
+
+Incluye:
+
+páginas web corporativas
+
+webs para negocios locales
+
+landing pages
+
+diseño responsive para móvil y ordenador
+
+optimización de rendimiento
+
+Chatbots con inteligencia artificial
+
+Desarrollo asistentes virtuales capaces de responder preguntas, automatizar conversaciones y gestionar información de clientes.
+
+Los chatbots pueden integrarse en páginas web o sistemas internos y pueden estar entrenados con la información del negocio.
+
+Incluye:
+
+asistentes virtuales para empresas
+
+atención al cliente automatizada
+
+respuestas inteligentes
+
+chatbots entrenados con bases de datos
+
+integración con APIs y servicios externos
+
+Automatización con n8n
+
+Creación de workflows automáticos para conectar herramientas y automatizar procesos.
+
+Esto permite reducir trabajo manual y mejorar la eficiencia de los sistemas.
+
+Incluye:
+
+automatización de tareas repetitivas
+
+conexión entre diferentes plataformas
+
+workflows personalizados
+
+automatización de procesos internos
+
+gestión automática de datos
+
+Integraciones API
+
+Desarrollo de integraciones entre diferentes sistemas y servicios digitales mediante APIs.
+
+Esto permite conectar plataformas, sincronizar información y crear sistemas más completos.
+
+Incluye:
+
+conexión entre aplicaciones
+
+sincronización de datos
+
+integración con servicios externos
+
+desarrollo de APIs
+
+comunicación entre sistemas
+
+Sistemas digitales y Web Apps
+
+Desarrollo de herramientas digitales personalizadas y aplicaciones web accesibles desde navegador.
+
+Estas aplicaciones pueden servir como plataformas internas, herramientas de gestión o productos digitales.
+
+Incluye:
+
+aplicaciones web personalizadas
+
+herramientas internas para empresas
+
+plataformas digitales
+
+interfaces interactivas
+
+sistemas escalables
+
+Proyectos desarrollados
+CleanNova Home Services
+
+Página web desarrollada para una empresa de limpieza profesional.
+El sitio permite presentar los servicios de limpieza, solicitar presupuestos y mostrar información sobre la empresa de forma clara y moderna.
+
+Incluye diseño optimizado para conversión y experiencia de usuario orientada a captar clientes.
+
+Gabrielle Canal
+
+Página web personal para Gabrielle Canal, artista y facilitadora de yoga, voz y respiración.
+
+La web presenta su trabajo, sus servicios y su filosofía con un diseño elegante y minimalista que refleja su identidad personal y artística.
+
+Impostor Game
+
+Aplicación web interactiva para jugar al juego del impostor.
+La plataforma permite configurar jugadores, generar palabras aleatorias y gestionar el juego directamente desde el navegador.
+
+El diseño está enfocado a una experiencia divertida, moderna y fácil de usar.
+
+Infinity Project
+
+Proyecto digital centrado en el desarrollo de soluciones tecnológicas avanzadas y plataformas digitales.
+
+El proyecto explora nuevas formas de construir herramientas digitales, automatización y productos tecnológicos escalables.
+
+Enfoque de trabajo
+
+Mi enfoque combina:
+
+diseño moderno
+
+desarrollo tecnológico
+
+automatización
+
+inteligencia artificial
+
+No solo construyo interfaces visuales, sino sistemas funcionales que ayudan a las empresas a optimizar procesos y mejorar su presencia digital.
+
+El objetivo es crear soluciones digitales que sean eficientes, escalables y útiles para el crecimiento de los proyectos.
