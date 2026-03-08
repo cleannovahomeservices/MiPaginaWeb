@@ -75,9 +75,9 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 glass-card border-b-0 border-b-white/5 py-4">
         <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <img src={logoImg} alt="APIORA Logo" className="h-10 w-auto object-contain" />
-            <span className="font-display font-bold text-xl tracking-wider hidden sm:block">APIORA</span>
+          <div className="flex items-center gap-2">
+            <img src="/apiora-logo.png" alt="APIORA Logo" className="h-8 w-auto object-contain" />
+            <span className="font-display font-bold text-lg tracking-wider hidden sm:block">APIORA</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-muted-foreground">
             <a href="#servicios" className="hover:text-primary transition-colors">Servicios</a>
@@ -299,96 +299,74 @@ export default function Home() {
       </section>
 
       {/* Calendar Section */}
-      <section id="contacto" className="py-24 px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-        
-        {/* Background effects */}
-        <div className="absolute top-1/2 -left-64 w-96 h-96 bg-primary/10 rounded-full blur-[150px] -translate-y-1/2"></div>
-        <div className="absolute top-1/2 -right-64 w-96 h-96 bg-secondary/10 rounded-full blur-[150px] -translate-y-1/2"></div>
-        
-        <div className="container mx-auto max-w-5xl relative z-10">
-          <motion.div {...fadeInUp} className="mb-16 text-center">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-muted-foreground mb-4">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Próximo paso
+      <section id="contacto" className="py-20 px-6 md:py-28 relative overflow-hidden" style={{
+        background: `
+          radial-gradient(circle at top left, rgba(0, 212, 255, 0.08), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.08), transparent 30%)
+        `,
+        backgroundColor: "#0f0f1a"
+      }}>
+        <div className="container mx-auto max-w-6xl relative z-10">
+          {/* Header Section */}
+          <motion.div {...fadeInUp} className="mb-12 md:mb-16 text-center">
+            <span className="inline-block mb-4 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-xs font-medium text-primary tracking-wide uppercase">
+              Reserva online
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Empecemos tu <span className="text-gradient">proyecto</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              Agenda tu cita
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Reserva una llamada para discutir cómo podemos escalar tu negocio con tecnología.
+            <p className="max-w-2xl mx-auto text-muted-foreground text-lg leading-relaxed">
+              Escoge el día y la hora que mejor te vaya. La reserva se confirma directamente con Google Calendar.
             </p>
           </motion.div>
 
-          {/* Calendar container with enhanced styling */}
+          {/* Booking Card */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-2xl opacity-50"></div>
-            
-            {/* Main card */}
-            <div className="relative glass-card rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,212,255,0.15)]">
-              {/* Header accent */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
-              
-              {/* Calendar wrapper with custom styling */}
-              <div className="p-6 md:p-8 lg:p-10">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl" style={{ minHeight: "700px" }}>
-                  {/* Google Calendar Appointment Scheduling */}
+            {/* Card */}
+            <div 
+              className="relative rounded-3xl overflow-hidden backdrop-blur-lg border border-white/10 shadow-2xl"
+              style={{
+                background: "rgba(255, 255, 255, 0.06)",
+                boxShadow: "0 20px 60px rgba(0, 0, 0, 0.35)"
+              }}
+            >
+              {/* Inner padding container */}
+              <div className="p-4 md:p-6 lg:p-8">
+                {/* Calendar iframe container */}
+                <div className="bg-white rounded-2xl overflow-hidden shadow-xl" style={{ minHeight: "720px" }}>
                   <iframe 
                     src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1qt6FdVc-Yf8UBUhJjDeRxUv9tDJnKtircpRFXO9ux6Ry8GatR1d9K5AGBEMlYMp26ul_I-BY-?gv=true" 
-                    style={{ border: 0, width: "100%", height: "100%", minHeight: "700px" }}
+                    style={{ 
+                      border: 0, 
+                      width: "100%", 
+                      height: "100%", 
+                      minHeight: "720px",
+                      borderRadius: "16px"
+                    }}
                     frameBorder="0"
                     title="Agendar reunión con Ami Cranz"
                   ></iframe>
                 </div>
               </div>
-              
-              {/* Bottom accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-50"></div>
-            </div>
-          </motion.div>
-
-          {/* Info cards below calendar */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid md:grid-cols-3 gap-6 mt-12"
-          >
-            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
-              <div className="text-2xl mb-2">⚡</div>
-              <h3 className="font-bold mb-2">Rápido</h3>
-              <p className="text-sm text-muted-foreground">Respuesta en 24 horas</p>
-            </div>
-            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
-              <div className="text-2xl mb-2">💡</div>
-              <h3 className="font-bold mb-2">Consultivo</h3>
-              <p className="text-sm text-muted-foreground">Asesoramiento personalizado</p>
-            </div>
-            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
-              <div className="text-2xl mb-2">🚀</div>
-              <h3 className="font-bold mb-2">Resultados</h3>
-              <p className="text-sm text-muted-foreground">Soluciones que funcionan</p>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-black/50 py-10 mt-10">
+      <footer className="border-t border-white/10 bg-black/50 py-8">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <img src={logoImg} alt="APIORA" className="h-8 w-auto grayscale opacity-70" />
-            <span className="font-display font-bold text-lg tracking-wider text-muted-foreground">APIORA</span>
+          <div className="flex items-center gap-2">
+            <img src="/apiora-logo.png" alt="APIORA" className="h-6 w-auto opacity-70" />
+            <span className="font-display font-bold text-sm tracking-wider text-muted-foreground hidden sm:block">APIORA</span>
           </div>
-          <div className="text-muted-foreground text-sm">
+          <div className="text-muted-foreground text-xs md:text-sm text-center md:text-right">
             © {new Date().getFullYear()} APIORA - AI & Automation. Todos los derechos reservados.
           </div>
         </div>
