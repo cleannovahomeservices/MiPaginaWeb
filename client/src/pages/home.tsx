@@ -221,60 +221,162 @@ export default function Home() {
 
       {/* About Section */}
       <section id="sobre-mi" className="py-24 px-6 relative overflow-hidden">
-        <div className="container mx-auto max-w-5xl">
-          <div className="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
-            {/* Background elements */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px]"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[100px]"></div>
+        <div className="container mx-auto max-w-6xl">
+          <div className="relative">
+            {/* Background gradient orbs */}
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-[120px]"></div>
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/5 rounded-full blur-[120px]"></div>
             
-            <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center">
-              <div className="w-full md:w-1/3 flex justify-center">
-                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white/10 relative">
-                  <img src={logoImg} alt="Ami Cranz" className="w-full h-full object-cover bg-black" />
+            <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+              {/* Photo side */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+                className="order-2 md:order-1 flex justify-center"
+              >
+                <div className="relative w-full max-w-sm">
+                  {/* Glowing border */}
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-primary to-secondary opacity-0 p-[2px] hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-[2px] rounded-3xl bg-card"></div>
+                  </div>
+                  
+                  <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                    <img 
+                      src="/ami-photo.jpg" 
+                      alt="Ami Cranz" 
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="w-full md:w-2/3">
-                <h2 className="text-sm font-bold text-primary tracking-widest uppercase mb-2">Fundador y Desarrollador Digital</h2>
-                <h3 className="text-3xl md:text-4xl font-display font-bold mb-6">Ami Cranz</h3>
-                <div className="space-y-4 text-muted-foreground text-lg">
-                  <p>
-                    Soy un desarrollador digital especializado en crear soluciones tecnológicas modernas para negocios y proyectos digitales. Trabajo combinando diseño web, automatización, inteligencia artificial y desarrollo de sistemas digitales.
-                  </p>
-                  <p>
-                    Mi enfoque no es solo crear páginas web bonitas, sino desarrollar productos digitales que realmente funcionen y ayuden a las empresas a crecer.
-                  </p>
+              </motion.div>
+
+              {/* Text side */}
+              <motion.div 
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                className="order-1 md:order-2"
+              >
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-xs font-bold text-primary tracking-widest uppercase mb-3 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-primary"></span>
+                      Fundador y Desarrollador Digital
+                    </h2>
+                    <h1 className="text-4xl md:text-5xl font-display font-bold leading-tight">
+                      Ami <br className="hidden md:block" /> Cranz
+                    </h1>
+                  </div>
+                  
+                  <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
+                    <p>
+                      Soy un desarrollador digital especializado en crear soluciones tecnológicas modernas para negocios y proyectos digitales. Trabajo combinando diseño web, automatización, inteligencia artificial y desarrollo de sistemas digitales.
+                    </p>
+                    <p>
+                      Mi enfoque no es solo crear páginas web bonitas, sino desarrollar productos digitales que realmente funcionen y ayuden a las empresas a crecer.
+                    </p>
+                  </div>
+
+                  {/* Key points */}
+                  <div className="grid grid-cols-2 gap-4 pt-6">
+                    <div className="glass-card rounded-xl p-4 border border-white/5">
+                      <div className="text-2xl font-bold text-primary mb-1">4+</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide">Proyectos Completados</div>
+                    </div>
+                    <div className="glass-card rounded-xl p-4 border border-white/5">
+                      <div className="text-2xl font-bold text-secondary mb-1">100%</div>
+                      <div className="text-xs text-muted-foreground uppercase tracking-wide">Satisfacción</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Calendar Section */}
-      <section id="contacto" className="py-20 px-6 relative">
+      <section id="contacto" className="py-24 px-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-        <div className="container mx-auto max-w-4xl text-center">
-          <motion.div {...fadeInUp} className="mb-12">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">Empecemos tu proyecto</h2>
-            <p className="text-muted-foreground text-lg">Reserva una llamada para discutir cómo podemos escalar tu negocio con tecnología.</p>
+        
+        {/* Background effects */}
+        <div className="absolute top-1/2 -left-64 w-96 h-96 bg-primary/10 rounded-full blur-[150px] -translate-y-1/2"></div>
+        <div className="absolute top-1/2 -right-64 w-96 h-96 bg-secondary/10 rounded-full blur-[150px] -translate-y-1/2"></div>
+        
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <motion.div {...fadeInUp} className="mb-16 text-center">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-muted-foreground mb-4">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              Próximo paso
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Empecemos tu <span className="text-gradient">proyecto</span>
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Reserva una llamada para discutir cómo podemos escalar tu negocio con tecnología.
+            </p>
           </motion.div>
 
+          {/* Calendar container with enhanced styling */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card rounded-2xl p-2 md:p-4 overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,212,255,0.1)]"
+            transition={{ duration: 0.6 }}
+            className="relative"
           >
-            {/* Google Calendar Appointment Scheduling */}
-            <iframe 
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1qt6FdVc-Yf8UBUhJjDeRxUv9tDJnKtircpRFXO9ux6Ry8GatR1d9K5AGBEMlYMp26ul_I-BY-?gv=true" 
-              style={{ border: 0 }} 
-              width="100%" 
-              height="600" 
-              frameBorder="0"
-              title="Agendar reunión"
-              className="bg-white rounded-xl" // Ensure the calendar iframe has white bg if it expects it
-            ></iframe>
+            {/* Glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-2xl opacity-50"></div>
+            
+            {/* Main card */}
+            <div className="relative glass-card rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,212,255,0.15)]">
+              {/* Header accent */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary"></div>
+              
+              {/* Calendar wrapper with custom styling */}
+              <div className="p-6 md:p-8 lg:p-10">
+                <div className="bg-white rounded-2xl overflow-hidden shadow-xl" style={{ minHeight: "700px" }}>
+                  {/* Google Calendar Appointment Scheduling */}
+                  <iframe 
+                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1qt6FdVc-Yf8UBUhJjDeRxUv9tDJnKtircpRFXO9ux6Ry8GatR1d9K5AGBEMlYMp26ul_I-BY-?gv=true" 
+                    style={{ border: 0, width: "100%", height: "100%", minHeight: "700px" }}
+                    frameBorder="0"
+                    title="Agendar reunión con Ami Cranz"
+                  ></iframe>
+                </div>
+              </div>
+              
+              {/* Bottom accent */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary via-primary to-secondary opacity-50"></div>
+            </div>
+          </motion.div>
+
+          {/* Info cards below calendar */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid md:grid-cols-3 gap-6 mt-12"
+          >
+            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
+              <div className="text-2xl mb-2">⚡</div>
+              <h3 className="font-bold mb-2">Rápido</h3>
+              <p className="text-sm text-muted-foreground">Respuesta en 24 horas</p>
+            </div>
+            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
+              <div className="text-2xl mb-2">💡</div>
+              <h3 className="font-bold mb-2">Consultivo</h3>
+              <p className="text-sm text-muted-foreground">Asesoramiento personalizado</p>
+            </div>
+            <div className="glass-card rounded-xl p-6 border border-white/5 text-center">
+              <div className="text-2xl mb-2">🚀</div>
+              <h3 className="font-bold mb-2">Resultados</h3>
+              <p className="text-sm text-muted-foreground">Soluciones que funcionan</p>
+            </div>
           </motion.div>
         </div>
       </section>
