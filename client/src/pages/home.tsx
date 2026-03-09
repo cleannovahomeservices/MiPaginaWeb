@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Code, Zap, Bot, Network, ArrowRight } from "lucide-react";
+import {
+  ChevronRight,
+  Code,
+  Zap,
+  Bot,
+  Network,
+  ArrowRight,
+} from "lucide-react";
+import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { Chatbot } from "@/components/chatbot";
 
 // Images
 import logoImg from "@assets/ChatGPT_Image_8_mar_2026,_19_25_04_1772994311476.png";
@@ -51,22 +60,26 @@ export default function Home() {
     {
       title: "Página web CleanNova Home Services",
       description: "Diseño optimizado para conversión orientado a captar clientes para empresa de limpieza profesional. Presupuestos y servicios claros.",
-      image: cleanNovaImg
+      image: cleanNovaImg,
+      link: "https://cleannova.es",
     },
     {
       title: "Página web de Gabrielle Canal",
       description: "Diseño elegante y minimalista que refleja la identidad de una artista y facilitadora de yoga, voz y respiración.",
-      image: gabrielleImg
+      image: gabrielleImg,
+      link: "https://gabriellecanal.com",
     },
     {
       title: "Aplicación web del juego del impostor",
       description: "Plataforma interactiva para jugar, configurar jugadores y gestionar el juego con una experiencia divertida y moderna.",
-      image: impostorImg
+      image: impostorImg,
+      link: "https://www.impostor.click",
     },
     {
       title: "Infinity Project",
       description: "Ecosistema digital centrado en soluciones tecnológicas avanzadas y desarrollo de plataformas digitales escalables.",
-      image: infinityImg
+      image: infinityImg,
+      link: "https://investor.infinityproject.io",
     }
   ];
 
@@ -84,58 +97,19 @@ export default function Home() {
             <a href="#proyectos" className="hover:text-primary transition-colors">Proyectos</a>
             <a href="#sobre-mi" className="hover:text-primary transition-colors">Sobre Mí</a>
           </div>
-          <a href="#contacto" className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/50 px-5 py-2 rounded-full font-medium transition-all flex items-center gap-2">
-            Agendar <ChevronRight className="w-4 h-4" />
+          <a href="#proyectos" className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/50 px-5 py-2 rounded-full font-medium transition-all flex items-center gap-2">
+            Ver Proyectos <ChevronRight className="w-4 h-4" />
           </a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-48 md:pb-32 px-6">
-        <div className="container mx-auto max-w-5xl text-center">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 text-muted-foreground"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            Construyendo el futuro digital
-          </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
-          >
-            Infraestructura digital que permite escalar <br className="hidden md:block" />
-            <span className="text-gradient">sin fricciones tecnológicas</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto"
-          >
-            Desarrollo productos digitales que realmente funcionan. Combinamos diseño moderno, automatización e IA para construir herramientas útiles, escalables y eficientes.
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a href="#contacto" className="bg-primary text-primary-foreground px-8 py-3 rounded-full font-bold text-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all">
-              Agendar Asesoría
-            </a>
-            <a href="#proyectos" className="glass-card px-8 py-3 rounded-full font-medium text-lg hover:bg-white/5 transition-all">
-              Ver Proyectos
-            </a>
-          </motion.div>
-        </div>
+      {/* Hero Section with geometric animation */}
+      <section className="pt-32 md:pt-40">
+        <HeroGeometric
+          badge="Ami Cranz · Desarrollo Digital"
+          title1="Infraestructura digital"
+          title2="sin fricciones tecnológicas"
+        />
       </section>
 
       {/* Services Section */}
@@ -193,27 +167,31 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-10">
             {projects.map((project, idx) => (
-              <motion.div 
+              <motion.a
                 key={idx}
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group cursor-pointer"
+                className="group cursor-pointer block"
               >
                 <div className="relative rounded-2xl overflow-hidden mb-6 aspect-video border border-white/10 shadow-lg">
                   <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-transparent transition-colors duration-300"></div>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
+                  <img
+                    src={project.image}
+                    alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors flex items-center gap-2">
-                  {project.title} <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  {project.title}{" "}
+                  <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </h3>
                 <p className="text-muted-foreground">{project.description}</p>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -298,66 +276,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Calendar Section */}
-      <section id="contacto" className="py-20 px-6 md:py-28 relative overflow-hidden" style={{
-        background: `
-          radial-gradient(circle at top left, rgba(0, 212, 255, 0.08), transparent 30%),
-          radial-gradient(circle at bottom right, rgba(138, 43, 226, 0.08), transparent 30%)
-        `,
-        backgroundColor: "#0f0f1a"
-      }}>
-        <div className="container mx-auto max-w-6xl relative z-10">
-          {/* Header Section */}
-          <motion.div {...fadeInUp} className="mb-12 md:mb-16 text-center">
-            <span className="inline-block mb-4 px-4 py-2 rounded-full bg-white/8 border border-white/12 text-xs font-medium text-primary tracking-wide uppercase">
-              Reserva online
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Agenda tu cita
-            </h2>
-            <p className="max-w-2xl mx-auto text-muted-foreground text-lg leading-relaxed">
-              Escoge el día y la hora que mejor te vaya. La reserva se confirma directamente con Google Calendar.
-            </p>
-          </motion.div>
-
-          {/* Booking Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            {/* Card */}
-            <div 
-              className="relative rounded-3xl overflow-hidden backdrop-blur-lg border border-white/10 shadow-2xl"
-              style={{
-                background: "rgba(255, 255, 255, 0.06)",
-                boxShadow: "0 20px 60px rgba(0, 0, 0, 0.35)"
-              }}
-            >
-              {/* Inner padding container */}
-              <div className="p-4 md:p-6 lg:p-8">
-                {/* Calendar iframe container */}
-                <div className="bg-white rounded-2xl overflow-hidden shadow-xl" style={{ minHeight: "720px" }}>
-                  <iframe 
-                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1qt6FdVc-Yf8UBUhJjDeRxUv9tDJnKtircpRFXO9ux6Ry8GatR1d9K5AGBEMlYMp26ul_I-BY-?gv=true" 
-                    style={{ 
-                      border: 0, 
-                      width: "100%", 
-                      height: "100%", 
-                      minHeight: "720px",
-                      borderRadius: "16px"
-                    }}
-                    frameBorder="0"
-                    title="Agendar reunión con Ami Cranz"
-                  ></iframe>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <Chatbot />
 
       {/* Footer */}
       <footer className="border-t border-white/10 bg-black/50 py-8">
