@@ -7,11 +7,12 @@ import { cn } from "@/lib/utils";
 const CHAT_TITLE = "Asistente APIORA";
 const CHAT_SUBTITLE = "Resuelvo dudas sobre servicios y proyectos.";
 const INITIAL_MESSAGES: { id: string; role: "assistant"; content: string }[] = [
-  { id: "welcome-1", role: "assistant", content: "Hola, bienvenido." },
+  { id: "welcome-1", role: "assistant", content: "Hola, bienvenido a APIORA." },
   {
     id: "welcome-2",
     role: "assistant",
-    content: "Cuéntame qué necesitas y te ayudo con servicios, proyectos o automatización.",
+    content:
+      "Cuéntame qué necesitas y te ayudo con tu web, automatizaciones o proyectos digitales.",
   },
 ];
 
@@ -22,7 +23,7 @@ type Message = {
 };
 
 const ERROR_FALLBACK =
-  "Ahora mismo hay un problema de conexión. Inténtalo de nuevo en unos segundos.";
+  "Ha ocurrido un error al conectar con el asistente. Intenta de nuevo en unos minutos.";
 
 function genId() {
   return `msg-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
@@ -30,16 +31,44 @@ function genId() {
 
 export function Chatbot() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [hasWelcomed, setHasWelcomed] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  };
+
+  useEffect(() => {
+    scrollToBottom();
   }, [messages, loading]);
+
+  useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [open]);
+
+  const addMessage = (content: string, role: Message["role"]) => {
+    setMessages((prev) => [...prev, { id: genId(), role, content }]);
+  };
+
+  const openChat = () => {
+    setOpen(true);
+    if (!hasWelcomed) {
+      setMessages(INITIAL_MESSAGES);
+      setHasWelcomed(true);
+    }
+  };
+
+  const closeChat = () => {
+    setOpen(false);
+  };
 
   const send = async () => {
     const text = input.trim();
@@ -47,21 +76,14 @@ export function Chatbot() {
 
     setInput("");
     setError(null);
-    const userMsg: Message = { id: genId(), role: "user", content: text };
-    setMessages((prev) => [...prev, userMsg]);
+    addMessage(text, "user");
     setLoading(true);
 
     try {
       const reply = await sendChatMessage(text);
-      setMessages((prev) => [
-        ...prev,
-        { id: genId(), role: "assistant", content: reply },
-      ]);
+      addMessage(reply, "assistant");
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { id: genId(), role: "assistant", content: ERROR_FALLBACK },
-      ]);
+      addMessage(ERROR_FALLBACK, "assistant");
       setError(ERROR_FALLBACK);
     } finally {
       setLoading(false);
@@ -80,7 +102,7 @@ export function Chatbot() {
       {/* Floating open button */}
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={openChat}
         aria-label="Abrir chat"
         className={cn(
           "fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-2xl",
@@ -106,7 +128,7 @@ export function Chatbot() {
             <button
               type="button"
               aria-label="Cerrar"
-              onClick={() => setOpen(false)}
+              onClick={closeChat}
               className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             />
             <div className="relative flex flex-col w-full max-w-md h-[min(85vh,600px)] max-h-[600px] rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-[#0c0b0a] bg-gradient-to-b from-[#0e0d0c] via-[#0c0b0a] to-[#0a0908]">
@@ -122,7 +144,7 @@ export function Chatbot() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setOpen(false)}
+                  onClick={closeChat}
                   aria-label="Cerrar chat"
                   className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
                 >
@@ -180,6 +202,7 @@ export function Chatbot() {
                 <div className="flex gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-2 focus-within:border-primary/40 focus-within:ring-1 focus-within:ring-primary/30 transition-colors">
                   <input
                     type="text"
+                    ref={inputRef}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
