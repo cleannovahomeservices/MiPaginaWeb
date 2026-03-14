@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Chatbot = lazy(() => import("@/components/chatbot").then((m) => ({ default: m.Chatbot })));
 
@@ -30,9 +31,16 @@ import impostorImg from "@assets/yupp-generated-image-344841_1772994232084.jpg";
 import cleanNovaImg from "@assets/yupp-generated-image-814223_1772994232084.jpg";
 
 const NAV_LINKS = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Proyectos", href: "#proyectos" },
-  { label: "Sobre Mí", href: "#sobre-mi" },
+  { labelKey: "nav.services", href: "#servicios" },
+  { labelKey: "nav.projects", href: "#proyectos" },
+  { labelKey: "nav.aboutMe", href: "#sobre-mi" },
+];
+
+const SERVICE_CONFIG = [
+  { slug: "web-apps", href: "/servicios/web-apps", icon: Code, image: devImg, color: "from-cyan-500/20 to-cyan-500/0", accent: "text-cyan-400", border: "group-hover:border-cyan-500/30" },
+  { slug: "automatizacion", href: "/servicios/automatizacion", icon: Zap, image: n8nImg, color: "from-purple-500/20 to-purple-500/0", accent: "text-purple-400", border: "group-hover:border-purple-500/30" },
+  { slug: "chatbots-ia", href: "/servicios/chatbots-ia", icon: Bot, image: botImg, color: "from-emerald-500/20 to-emerald-500/0", accent: "text-emerald-400", border: "group-hover:border-emerald-500/30" },
+  { slug: "integraciones", href: "/servicios/integraciones", icon: Network, image: apiImg, color: "from-amber-500/20 to-amber-500/0", accent: "text-amber-400", border: "group-hover:border-amber-500/30" },
 ];
 
 const fadeInUp = {
@@ -49,86 +57,11 @@ const staggerChild = (idx: number) => ({
   transition: { duration: 0.5, delay: idx * 0.12 },
 });
 
-const services = [
-  {
-    title: "Desarrollo Web y Apps",
-    description:
-      "Páginas web modernas, aplicaciones y plataformas digitales diseñadas para crecer contigo.",
-    href: "/servicios/web-apps",
-    icon: <Code className="w-5 h-5" />,
-    image: devImg,
-    color: "from-cyan-500/20 to-cyan-500/0",
-    accent: "text-cyan-400",
-    border: "group-hover:border-cyan-500/30",
-  },
-  {
-    title: "Automatización de Procesos",
-    description:
-      "Automatizamos tareas repetitivas y conectamos herramientas para que tu negocio funcione de forma más eficiente.",
-    href: "/servicios/automatizacion",
-    icon: <Zap className="w-5 h-5" />,
-    image: n8nImg,
-    color: "from-purple-500/20 to-purple-500/0",
-    accent: "text-purple-400",
-    border: "group-hover:border-purple-500/30",
-  },
-  {
-    title: "Chatbots y Sistemas con IA",
-    description:
-      "Asistentes inteligentes capaces de atender clientes, responder preguntas y automatizar procesos.",
-    href: "/servicios/chatbots-ia",
-    icon: <Bot className="w-5 h-5" />,
-    image: botImg,
-    color: "from-emerald-500/20 to-emerald-500/0",
-    accent: "text-emerald-400",
-    border: "group-hover:border-emerald-500/30",
-  },
-  {
-    title: "Integraciones y Sistemas Digitales",
-    description:
-      "Conectamos plataformas y herramientas para crear ecosistemas digitales completos.",
-    href: "/servicios/integraciones",
-    icon: <Network className="w-5 h-5" />,
-    image: apiImg,
-    color: "from-amber-500/20 to-amber-500/0",
-    accent: "text-amber-400",
-    border: "group-hover:border-amber-500/30",
-  },
-];
-
-const projects = [
-  {
-    title: "CleanNova Home Services",
-    description:
-      "Diseño optimizado para conversión orientado a captar clientes de limpieza profesional.",
-    image: cleanNovaImg,
-    link: "https://cleannova.es",
-    tag: "Web Corporativa",
-  },
-  {
-    title: "Gabrielle Canal",
-    description:
-      "Diseño elegante y minimalista para una artista y facilitadora de yoga, voz y respiración.",
-    image: gabrielleImg,
-    link: "https://gabriellecanal.com",
-    tag: "Web Personal",
-  },
-  {
-    title: "Impostor Game",
-    description:
-      "Plataforma interactiva para configurar jugadores y gestionar el juego del impostor.",
-    image: impostorImg,
-    link: "https://www.impostor.click",
-    tag: "Aplicación Web",
-  },
-  {
-    title: "Infinity Project",
-    description:
-      "Ecosistema digital centrado en soluciones tecnológicas avanzadas y plataformas escalables.",
-    image: infinityImg,
-    link: "https://investor.infinityproject.io",
-    tag: "Plataforma Digital",
-  },
+const PROJECT_IMAGES_AND_LINKS = [
+  { image: cleanNovaImg, link: "https://cleannova.es" },
+  { image: gabrielleImg, link: "https://gabriellecanal.com" },
+  { image: impostorImg, link: "https://www.impostor.click" },
+  { image: infinityImg, link: "https://investor.infinityproject.io" },
 ];
 
 const techStack = [
@@ -150,6 +83,7 @@ const techStack = [
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { lang, setLang, t } = useLanguage();
 
   return (
     <div className="min-h-screen tech-grid relative overflow-hidden">
@@ -168,17 +102,48 @@ export default function Home() {
                 href={link.href}
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
               >
-                {link.label}
+                {t(link.labelKey)}
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Language toggle: ES | EN */}
+            <div
+              className="flex rounded-full border border-white/10 bg-white/5 p-0.5"
+              role="group"
+              aria-label="Idioma / Language"
+            >
+              <button
+                type="button"
+                onClick={() => setLang("es")}
+                className={cn(
+                  "min-w-[2.25rem] sm:min-w-[2.5rem] py-1.5 px-2 rounded-full text-xs sm:text-sm font-medium transition-colors",
+                  lang === "es"
+                    ? "bg-primary/20 text-primary border border-primary/30"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5",
+                )}
+              >
+                ES
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={cn(
+                  "min-w-[2.25rem] sm:min-w-[2.5rem] py-1.5 px-2 rounded-full text-xs sm:text-sm font-medium transition-colors",
+                  lang === "en"
+                    ? "bg-primary/20 text-primary border border-primary/30"
+                    : "text-muted-foreground hover:text-foreground hover:bg-white/5",
+                )}
+              >
+                EN
+              </button>
+            </div>
             <a
               href="#proyectos"
               className="hidden sm:inline-flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 hover:border-primary/50 px-5 py-2 rounded-full text-sm font-medium transition-all hover:shadow-[0_0_16px_rgba(0,212,255,0.2)]"
             >
-              Ver Proyectos <ChevronRight className="w-3.5 h-3.5" />
+              {t("nav.viewProjects")} <ChevronRight className="w-3.5 h-3.5" />
             </a>
             <button
               type="button"
@@ -205,9 +170,33 @@ export default function Home() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="px-4 py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg hover:bg-white/5"
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </a>
               ))}
+              <div className="flex justify-center pt-2">
+                <div className="flex rounded-full border border-white/10 bg-white/5 p-0.5" aria-label="Idioma / Language">
+                  <button
+                    type="button"
+                    onClick={() => { setLang("es"); setMobileMenuOpen(false); }}
+                    className={cn(
+                      "min-w-[2.5rem] py-2 px-3 rounded-full text-sm font-medium transition-colors",
+                      lang === "es" ? "bg-primary/20 text-primary border border-primary/30" : "text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    ES
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setLang("en"); setMobileMenuOpen(false); }}
+                    className={cn(
+                      "min-w-[2.5rem] py-2 px-3 rounded-full text-sm font-medium transition-colors",
+                      lang === "en" ? "bg-primary/20 text-primary border border-primary/30" : "text-muted-foreground hover:text-foreground",
+                    )}
+                  >
+                    EN
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -215,10 +204,10 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <HeroGeometric
-        badge="APIORA · AI & Automation"
-        title1="Sistemas inteligentes"
-        title2="para negocios digitales"
-        subtitle="IA, automatización, páginas web y apps para empresas modernas."
+        badge={t("hero.badge")}
+        title1={t("hero.title1")}
+        title2={t("hero.title2")}
+        subtitle={t("hero.subtitle")}
       >
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
           <a
@@ -226,13 +215,13 @@ export default function Home() {
             className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold text-base hover:shadow-[0_0_24px_rgba(0,212,255,0.35)] transition-all"
           >
             <Sparkles className="w-4 h-4" />
-            Descubre Servicios
+            {t("hero.cta1")}
           </a>
           <a
             href="#proyectos"
             className="inline-flex items-center justify-center gap-2 glass-card px-8 py-3.5 rounded-full font-medium text-base hover:bg-white/5 transition-all border border-white/10"
           >
-            Ver Proyectos <ArrowRight className="w-4 h-4" />
+            {t("hero.cta2")} <ArrowRight className="w-4 h-4" />
           </a>
         </div>
       </HeroGeometric>
@@ -245,44 +234,44 @@ export default function Home() {
           <motion.div {...fadeInUp} className="mb-16 max-w-2xl">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary tracking-wider uppercase mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-glow-pulse" />
-              Lo que hago
+              {t("services.badge")}
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
-              Servicios <span className="text-gradient">Principales</span>
+              {t("services.title")} <span className="text-gradient">{t("services.titleHighlight")}</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Soluciones tecnológicas de extremo a extremo para negocios que quieren crecer en el mundo digital.
+              {t("services.subtitle")}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {services.map((service, idx) => (
+            {SERVICE_CONFIG.map((cfg, idx) => (
               <motion.a
-                key={idx}
-                href={service.href}
+                key={cfg.slug}
+                href={cfg.href}
                 {...staggerChild(idx)}
                 className={cn(
                   "group glass-card rounded-2xl overflow-hidden transition-all duration-500 block",
-                  service.border,
+                  cfg.border,
                 )}
               >
                 <div className="h-44 overflow-hidden relative border-b border-white/5">
-                  <div className={cn("absolute inset-0 z-10 bg-gradient-to-b", service.color, "opacity-60 group-hover:opacity-30 transition-opacity duration-500")} />
+                  <div className={cn("absolute inset-0 z-10 bg-gradient-to-b", cfg.color, "opacity-60 group-hover:opacity-30 transition-opacity duration-500")} />
                   <img
-                    src={service.image}
-                    alt={service.title}
+                    src={cfg.image}
+                    alt={t(`services.items.${cfg.slug}.title`)}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
                 <div className="p-7">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/10", service.accent)}>
-                      {service.icon}
+                    <div className={cn("p-2.5 rounded-xl bg-white/5 border border-white/10", cfg.accent)}>
+                      <cfg.icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-lg font-bold tracking-wide">{service.title}</h3>
+                    <h3 className="text-lg font-bold tracking-wide">{t(`services.items.${cfg.slug}.title`)}</h3>
                   </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{t(`services.items.${cfg.slug}.description`)}</p>
                 </div>
               </motion.a>
             ))}
@@ -299,18 +288,18 @@ export default function Home() {
           <motion.div {...fadeInUp} className="mb-16 text-center">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-semibold text-secondary tracking-wider uppercase mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-glow-pulse" />
-              Portfolio
+              {t("projects.badge")}
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mb-5 leading-tight">
-              Proyectos <span className="text-gradient">Desarrollados</span>
+              {t("projects.title")} <span className="text-gradient">{t("projects.titleHighlight")}</span>
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              Sistemas funcionales que ayudan a optimizar procesos y hacer crecer negocios reales.
+              {t("projects.subtitle")}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, idx) => (
+            {PROJECT_IMAGES_AND_LINKS.map((project, idx) => (
               <motion.a
                 key={idx}
                 href={project.link}
@@ -323,13 +312,13 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10 group-hover:from-black/40 transition-all duration-500" />
                   <img
                     src={project.image}
-                    alt={project.title}
+                    alt={t(`projects.items.${idx}.title`)}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 z-20">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10 text-xs font-medium text-white/70">
-                      {project.tag}
+                      {t(`projects.items.${idx}.tag`)}
                     </span>
                   </div>
                   <div className="absolute bottom-4 right-4 z-20 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
@@ -341,10 +330,10 @@ export default function Home() {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h3 className="text-xl font-bold mb-1.5 group-hover:text-primary transition-colors flex items-center gap-2">
-                      {project.title}
+                      {t(`projects.items.${idx}.title`)}
                       <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-60 transition-opacity" />
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{t(`projects.items.${idx}.description`)}</p>
                   </div>
                 </div>
               </motion.a>
@@ -388,20 +377,16 @@ export default function Home() {
               <div>
                 <span className="inline-flex items-center gap-2 text-xs font-bold text-primary tracking-widest uppercase mb-4">
                   <span className="w-2 h-2 rounded-full bg-primary" />
-                  Fundador y Desarrollador Digital
+                  {t("about.badge")}
                 </span>
                 <h2 className="text-4xl md:text-5xl font-display font-bold leading-tight">
-                  Ami Cranz
+                  {t("about.name")}
                 </h2>
               </div>
 
               <div className="space-y-4 text-muted-foreground text-base leading-relaxed">
-                <p>
-                  Soy un desarrollador digital especializado en crear soluciones tecnológicas modernas para negocios y proyectos digitales. Trabajo combinando diseño web, automatización, inteligencia artificial y desarrollo de sistemas digitales.
-                </p>
-                <p>
-                  Mi enfoque no es solo crear páginas web bonitas, sino desarrollar productos digitales que realmente funcionen y ayuden a las empresas a crecer.
-                </p>
+                <p>{t("about.paragraph1")}</p>
+                <p>{t("about.paragraph2")}</p>
               </div>
 
               {/* Tech stack tags */}
@@ -420,15 +405,15 @@ export default function Home() {
               <div className="grid grid-cols-3 gap-4 pt-4">
                 <div className="glass-card rounded-xl p-4 text-center border border-white/5">
                   <div className="text-2xl font-bold text-primary mb-0.5">4+</div>
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Proyectos</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("about.stats.projects")}</div>
                 </div>
                 <div className="glass-card rounded-xl p-4 text-center border border-white/5">
                   <div className="text-2xl font-bold text-secondary mb-0.5">100%</div>
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Satisfacción</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("about.stats.satisfaction")}</div>
                 </div>
                 <div className="glass-card rounded-xl p-4 text-center border border-white/5">
                   <div className="text-2xl font-bold text-emerald-400 mb-0.5">24/7</div>
-                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Soporte IA</div>
+                  <div className="text-[10px] text-muted-foreground uppercase tracking-wider">{t("about.stats.support")}</div>
                 </div>
               </div>
             </motion.div>
@@ -448,13 +433,13 @@ export default function Home() {
               <div className="relative z-10">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary tracking-wider uppercase mb-6">
                   <Sparkles className="w-3 h-3" />
-                  Hablemos
+                  {t("cta.badge")}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-                  ¿Tienes un proyecto en mente?
+                  {t("cta.title")}
                 </h2>
                 <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-                  Cuéntame tu idea y te ayudo a convertirla en un producto digital real. Sin compromiso. O escríbeme por el chatbot y agenda una llamada.
+                  {t("cta.subtitle")}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a
@@ -464,13 +449,13 @@ export default function Home() {
                     className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold text-base hover:shadow-[0_0_24px_rgba(0,212,255,0.35)] transition-all"
                   >
                     <Mail className="w-4 h-4" />
-                    Enviar Email
+                    {t("cta.email")}
                   </a>
                   <a
                     href="#sobre-mi"
                     className="inline-flex items-center justify-center gap-2 glass-card px-8 py-3.5 rounded-full font-medium text-base hover:bg-white/5 transition-all border border-white/10"
                   >
-                    Saber más
+                    {t("cta.more")}
                   </a>
                 </div>
               </div>
@@ -492,7 +477,7 @@ export default function Home() {
               <span className="font-display font-bold text-sm tracking-widest text-muted-foreground">APIORA</span>
             </div>
             <div className="text-muted-foreground text-xs text-center md:text-right">
-              © {new Date().getFullYear()} APIORA - AI & Automation. Todos los derechos reservados.
+              © {new Date().getFullYear()} APIORA - AI & Automation. {t("footer.copyright")}
             </div>
           </div>
         </div>
