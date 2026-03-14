@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, Menu, X, Mail } from "lucide-react";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { getServiceBySlug } from "@/data/services";
-import { Chatbot } from "@/components/chatbot";
+
+const Chatbot = lazy(() => import("@/components/chatbot").then((m) => ({ default: m.Chatbot })));
 
 const NAV_LINKS = [
   { label: "Servicios", href: "/#servicios" },
@@ -165,7 +166,9 @@ export default function ServicePage({ slug }: ServicePageProps) {
         </div>
       </section>
 
-      <Chatbot />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
     </div>
   );
 }

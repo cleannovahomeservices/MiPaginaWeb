@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import {
   ChevronRight,
@@ -15,8 +15,9 @@ import {
   Mail,
 } from "lucide-react";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
-import { Chatbot } from "@/components/chatbot";
 import { cn } from "@/lib/utils";
+
+const Chatbot = lazy(() => import("@/components/chatbot").then((m) => ({ default: m.Chatbot })));
 
 import logoImg from "@assets/ChatGPT_Image_8_mar_2026,_19_25_04_1772994311476.png";
 import devImg from "@assets/1772983080062-8iysnwt94dg_1772994215589.png";
@@ -270,6 +271,7 @@ export default function Home() {
                   <img
                     src={service.image}
                     alt={service.title}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
@@ -322,6 +324,7 @@ export default function Home() {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 z-20">
@@ -369,7 +372,7 @@ export default function Home() {
               <div className="relative w-full max-w-xs">
                 <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-secondary/30 blur-sm opacity-60" />
                 <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src="/ami-photo.jpg" alt="Ami Cranz" className="w-full h-auto object-cover" />
+                  <img src="/ami-photo.jpg" alt="Ami Cranz" loading="lazy" className="w-full h-auto object-cover" />
                 </div>
               </div>
             </motion.div>
@@ -476,7 +479,9 @@ export default function Home() {
         </div>
       </section>
 
-      <Chatbot />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
 
       {/* ── Footer ── */}
       <footer className="border-t border-white/10 bg-black/60 py-12">
