@@ -1,0 +1,15 @@
+# Render.com - Deploy desde GitHub
+# Conecta el repo en https://dashboard.render.com y usa "New > Web Service"
+# o importa este blueprint si tu plan lo permite.
+
+services:
+  - type: web
+    name: paginawebami
+    runtime: node
+
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+
+    envVars:
+      - key: NODE_ENV
+        value: production
