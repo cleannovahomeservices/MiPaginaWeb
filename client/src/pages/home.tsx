@@ -91,7 +91,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/70 border-b border-white/5">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2.5">
-            <img src="/apiora-logo.png" alt="APIORA" className="h-7 w-auto object-contain" />
+            <img src="/apiora-logo.png" alt="APIORA" className="h-7 w-auto object-contain" width="112" height="28" decoding="async" />
             <span className="font-display font-bold text-base tracking-widest">APIORA</span>
           </a>
 
@@ -261,6 +261,7 @@ export default function Home() {
                     src={cfg.image}
                     alt={t(`services.items.${cfg.slug}.title`)}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
@@ -314,6 +315,7 @@ export default function Home() {
                     src={project.image}
                     alt={t(`projects.items.${idx}.title`)}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-4 left-4 z-20">
@@ -361,7 +363,7 @@ export default function Home() {
               <div className="relative w-full max-w-xs">
                 <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-primary/30 via-transparent to-secondary/30 blur-sm opacity-60" />
                 <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src="/ami-photo.jpg" alt="Ami Cranz" loading="lazy" className="w-full h-auto object-cover" />
+                  <img src="/ami-photo.jpg" alt="Ami Cranz" loading="lazy" decoding="async" className="w-full h-auto object-cover" />
                 </div>
               </div>
             </motion.div>
@@ -473,7 +475,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <img src="/apiora-logo.png" alt="APIORA" className="h-6 w-auto opacity-60" />
+              <img src="/apiora-logo.png" alt="APIORA" className="h-6 w-auto opacity-60" width="96" height="24" decoding="async" />
               <span className="font-display font-bold text-sm tracking-widest text-muted-foreground">APIORA</span>
             </div>
             <div className="text-muted-foreground text-xs text-center md:text-right">

@@ -50,7 +50,7 @@ export default function ServicePage({ slug }: ServicePageProps) {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/70 border-b border-white/5">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2.5">
-            <img src="/apiora-logo.png" alt="APIORA" className="h-7 w-auto object-contain" />
+            <img src="/apiora-logo.png" alt="APIORA" className="h-7 w-auto object-contain" width="112" height="28" decoding="async" />
             <span className="font-display font-bold text-base tracking-widest">APIORA</span>
           </a>
 
