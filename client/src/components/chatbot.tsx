@@ -190,8 +190,11 @@ export function Chatbot() {
                     animate={{ opacity: 1 }}
                     className="flex justify-start"
                   >
-                    <div className="rounded-2xl rounded-bl-md bg-white/[0.06] border border-white/10 px-4 py-2.5 text-sm text-muted-foreground">
-                      Escribiendo...
+                    <div className="rounded-2xl rounded-bl-md bg-white/[0.06] border border-white/10 px-4 py-3 text-sm text-muted-foreground flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce [animation-delay:0ms]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce [animation-delay:150ms]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-bounce [animation-delay:300ms]" />
+                      <span className="ml-1.5">Escribiendo</span>
                     </div>
                   </motion.div>
                 )}
