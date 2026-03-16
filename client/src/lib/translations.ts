@@ -21,6 +21,7 @@ export const translations: Record<Lang, Record<string, unknown>> = {
       title: "Servicios",
       titleHighlight: "Principales",
       subtitle: "Soluciones tecnológicas de extremo a extremo para negocios que quieren crecer en el mundo digital.",
+      moreCta: "Ver más",
       items: {
         "web-apps": {
           title: "Desarrollo Web y Apps",
@@ -91,6 +92,7 @@ export const translations: Record<Lang, Record<string, unknown>> = {
     servicePage: {
       badge: "APIORA · Servicios",
       requestInfo: "Solicitar información",
+      bookCall: "Reserva una cita",
       whatIncludes: "¿Qué incluye este servicio?",
       detailTitle: "Detalle del servicio",
       notFound: "Servicio no encontrado.",
@@ -174,6 +176,7 @@ export const translations: Record<Lang, Record<string, unknown>> = {
       title: "Main",
       titleHighlight: "Services",
       subtitle: "End-to-end tech solutions for businesses that want to grow in the digital world.",
+      moreCta: "Learn more",
       items: {
         "web-apps": {
           title: "Web & App Development",
@@ -244,6 +247,7 @@ export const translations: Record<Lang, Record<string, unknown>> = {
     servicePage: {
       badge: "APIORA · Services",
       requestInfo: "Request information",
+      bookCall: "Book a call",
       whatIncludes: "What does this service include?",
       detailTitle: "Service details",
       notFound: "Service not found.",

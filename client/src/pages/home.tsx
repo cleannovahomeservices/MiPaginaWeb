@@ -273,6 +273,12 @@ export default function Home() {
                     <h3 className="text-lg font-bold tracking-wide">{t(`services.items.${cfg.slug}.title`)}</h3>
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed">{t(`services.items.${cfg.slug}.description`)}</p>
+                  <div className="mt-5 flex justify-end">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold text-foreground/80 group-hover:bg-white/10 transition-colors">
+                      {t("services.moreCta")}
+                      <ArrowRight className="w-3.5 h-3.5 opacity-70" />
+                    </span>
+                  </div>
                 </div>
               </motion.a>
             ))}
@@ -452,12 +458,6 @@ export default function Home() {
                   >
                     <Mail className="w-4 h-4" />
                     {t("cta.email")}
-                  </a>
-                  <a
-                    href="#sobre-mi"
-                    className="inline-flex items-center justify-center gap-2 glass-card px-8 py-3.5 rounded-full font-medium text-base hover:bg-white/5 transition-all border border-white/10"
-                  >
-                    {t("cta.more")}
                   </a>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 import { useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
-import { ChevronRight, Menu, X, Mail } from "lucide-react";
+import { ChevronRight, Menu, X, Mail, MessageCircle } from "lucide-react";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import { useLanguage } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
@@ -35,6 +35,7 @@ export default function ServicePage({ slug }: ServicePageProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { lang, setLang, t, get } = useLanguage();
   const serviceContent = get<ServiceContent>(`serviceContent.${slug}`);
+  const openChatbot = () => window.dispatchEvent(new Event("apiora:open-chatbot"));
 
   if (!serviceContent) {
     return (
@@ -187,15 +188,14 @@ export default function ServicePage({ slug }: ServicePageProps) {
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   {serviceContent.description}
                 </p>
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=cranzcanal@gmail.com&su=Contacto%20desde%20APIORA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full font-semibold text-sm md:text-base hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] transition-all"
+                <button
+                  type="button"
+                  onClick={openChatbot}
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-3 rounded-full font-semibold text-sm md:text-base hover:shadow-[0_0_20px_rgba(0,212,255,0.35)] transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                 >
-                  <Mail className="w-4 h-4" />
-                  {t("servicePage.requestInfo")}
-                </a>
+                  <MessageCircle className="w-4 h-4" />
+                  {t("servicePage.bookCall")}
+                </button>
               </div>
 
               <div className="space-y-4">

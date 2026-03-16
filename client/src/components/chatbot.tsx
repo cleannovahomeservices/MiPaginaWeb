@@ -70,6 +70,12 @@ export function Chatbot() {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const handler = () => openChat();
+    window.addEventListener("apiora:open-chatbot", handler);
+    return () => window.removeEventListener("apiora:open-chatbot", handler);
+  }, [hasWelcomed]);
+
   const send = async () => {
     const text = input.trim();
     if (!text || loading) return;
@@ -176,8 +182,8 @@ export function Chatbot() {
                       className={cn(
                         "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
                         msg.role === "user"
-                          ? "bg-primary/20 text-primary-foreground border border-primary/30 rounded-br-md"
-                          : "bg-white/[0.06] text-foreground border border-white/10 rounded-bl-md",
+                          ? "bg-primary/20 text-white border border-primary/30 rounded-br-md"
+                          : "bg-white/[0.06] text-white/90 border border-white/10 rounded-bl-md",
                       )}
                     >
                       {msg.content}
@@ -202,7 +208,7 @@ export function Chatbot() {
 
               {/* Input */}
               <div className="p-4 border-t border-white/10 bg-white/[0.02]">
-                <div className="flex gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-2 focus-within:border-primary/40 focus-within:ring-1 focus-within:ring-primary/30 transition-colors">
+                <div className="flex gap-2 rounded-2xl border border-white/10 bg-black/30 p-2 focus-within:border-primary/50 focus-within:ring-1 focus-within:ring-primary/30 transition-colors">
                   <input
                     type="text"
                     ref={inputRef}
@@ -211,7 +217,7 @@ export function Chatbot() {
                     onKeyDown={handleKeyDown}
                     placeholder="Escribe tu mensaje…"
                     disabled={loading}
-                    className="flex-1 min-w-0 bg-transparent px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:opacity-60"
+                    className="flex-1 min-w-0 bg-transparent px-3 py-2.5 text-sm text-white placeholder:text-white/50 caret-primary focus:outline-none disabled:opacity-60 selection:bg-primary/30"
                   />
                   <button
                     type="button"
